@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ljkgpxs/src/Doodler/cocos2d/external/recast/fastlz/fastlz.c
+fastlz.c
+/home/ljkgpxs/src/Doodler/cocos2d/external/recast/fastlz/fastlz.c
+fastlz.c
+/home/ljkgpxs/src/Doodler/cocos2d/external/recast/fastlz/fastlz.c
+
