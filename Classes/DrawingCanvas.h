@@ -1,4 +1,8 @@
+#pragma once
+
 #include "cocos2d.h"
+
+#define MAX_TOUCH_POINTS	10
 
 class DrawingCanvas : public cocos2d::Node
 {

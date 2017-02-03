@@ -55,7 +55,7 @@ void Lobby::soloPressed(Ref *pSender, ui::Widget::TouchEventType eEventType)
 void Lobby::duoPressed(Ref *pSender, ui::Widget::TouchEventType eEventType)
 {
 	if(eEventType == ui::Widget::TouchEventType::ENDED) {
-	CCDirector::sharedDirector()->end();
-        exit(0);
+		CCDirector::getInstance()->end();
+		exit(0);
         }
 }

@@ -23,20 +23,31 @@ void DrawingCanvas::onEnter()
 }
 void DrawingCanvas::setupTouchHandling()
 {
-	static Vec2 lastTouchPos;
-	auto touchListener = EventListenerTouchOneByOne::create();
-	touchListener->onTouchBegan = [&](Touch *touch, Event *event)
+	static Vec2 lastTouchPos[MAX_TOUCH_POINTS];
+	auto touchListener = EventListenerTouchAllAtOnce::create();
+	touchListener->onTouchesBegan = [&](const std::vector<Touch *> &touches, Event *event)
 	{
-		lastTouchPos = drawNode->convertTouchToNodeSpace(touch);
+		for(auto touch : touches) {
+			drawNode->drawDot(drawNode->convertTouchToNodeSpace(touch), 4.0f, Color4F::BLACK);
+			lastTouchPos[touch->getID()] = drawNode->convertTouchToNodeSpace(touch);
+		}
 		return true;
 	};
 
-	touchListener->onTouchMoved = [&](Touch* touch, Event* event)
+	touchListener->onTouchesMoved = [&](const std::vector<Touch *> &touches, Event *event)
 	{
-		Vec2 touchPos = drawNode->convertTouchToNodeSpace(touch);
-	//	CCLOG("Touch Moved! %f %f %f %f", touchPos.x, touchPos.y, lastTouchPos.x, lastTouchPos.y);
-		drawNode->drawSegment(lastTouchPos, touchPos, 4.0, Color4F::BLACK);
-		lastTouchPos = touchPos;
+		Vec2 touchPos;
+		for(auto touch : touches) {
+			touchPos = drawNode->convertTouchToNodeSpace(touch);
+			//CCLOG("Touch Moved! %f %f %f %f", touchPos.x, touchPos.y, lastTouchPos.x, lastTouchPos.y);
+			drawNode->drawSegment(lastTouchPos[touch->getID()], touchPos, 4.0, Color4F::BLACK);
+			lastTouchPos[touch->getID()] = touchPos;
+		}
+
+	};
+
+	touchListener->onTouchesCancelled = [&](const std::vector<Touch *> &touches, Event *event)
+	{
 
 	};
 
