@@ -1,5 +1,6 @@
 #include "Lobby.h"
 #include "DrawingCanvas.h"
+#include "Constants.h"
 
 using namespace cocos2d;
 
@@ -7,7 +8,7 @@ bool Lobby::init()
 {
 	if(!Node::init())
 		return false;
-	LayerColor *background = LayerColor::create(Color4B(255, 255, 255, 255));
+	LayerColor *background = LayerColor::create(Color4B(COLOR_WHITE));
 	this->addChild(background);
 	return true;
 }
@@ -45,10 +46,11 @@ void Lobby::setupUI()
 void Lobby::soloPressed(Ref *pSender, ui::Widget::TouchEventType eEventType)
 {
         if(eEventType == ui::Widget::TouchEventType::ENDED) {
-                Scene *scene = Scene::create();
+		Scene *scene = Scene::create();
+                auto transitionScene = TransitionMoveInR::create(0.3f, scene);
                 DrawingCanvas *drawingCanvas = DrawingCanvas::create();
                 scene->addChild(drawingCanvas);
-                Director::getInstance()->pushScene(scene);
+                Director::getInstance()->replaceScene(transitionScene);
         }
 }
 

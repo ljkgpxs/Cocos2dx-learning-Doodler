@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
+#include "platform/CCDevice.h"
 
 USING_NS_CC;
 
@@ -47,7 +48,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     // turn on display FPS
-    director->setDisplayStats(true);
+    director->setDisplayStats(false);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0f / 60);
@@ -55,9 +56,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
     FileUtils::getInstance()->addSearchPath("res");
     cocos2d::Size targetSize = glview->getFrameSize();
     std::vector<std::string> searchResolutionsOrder(1);
+    float dpi = Device::getDPI();
+    CCLog("Get DPI %f", dpi);
     if(targetSize.height < 481.0f)
 	    searchResolutionsOrder[0] = "resources-1x";
-    else if(targetSize.height < 1335.0f)
+    else if(targetSize.height < 1335.0f || dpi > 400)
 	    searchResolutionsOrder[0] = "resources-2x";
     else if(targetSize.height < 1921.0f)
 	    searchResolutionsOrder[0] = "resources-3x";

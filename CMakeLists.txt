@@ -140,6 +140,7 @@ set(GAME_HEADERS
   Classes/HelloWorldScene.h
   Classes/DrawingCanvas.h
   Classes/Lobby.h
+  Classes/Constants.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 
