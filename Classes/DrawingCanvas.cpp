@@ -55,6 +55,13 @@ void DrawingCanvas::setupTouchHandling()
 
 	};
 
+	touchListener->onTouchesEnded =[&](const std::vector<Touch *> &touches, Event *event)
+	{
+		for(int i = 0; i < lastRadius.size(); i++) {
+			lastRadius[i] = 4;
+		}
+	};
+
 	touchListener->onTouchesCancelled = [&](const std::vector<Touch *> &touches, Event *event)
 	{
 
